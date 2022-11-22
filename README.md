@@ -17,5 +17,5 @@
 - [Virtual Reality - Interactions](https://github.com/vMyth/VIPS-VR-Interactions)
 
 ## Other Resources
-- [Plan your GameDev or XR Portfolio](https://github.com/vMyth/XR-Dev-Course/blob/main/Game%20Dev%20Portfolio%20Plan.md)
-- [Render Pipelines in Unity](https://github.com/vMyth/XR-Dev-Course/blob/main/RenderPipelines.md)
+- [Plan your GameDev or XR Portfolio](https://github.com/vMyth/XR-Dev-Course/blob/main/Resources/Docs/Game%20Dev%20Portfolio%20Plan.md)
+- [Render Pipelines in Unity](https://github.com/vMyth/XR-Dev-Course/blob/main/Resources/Docs/RenderPipelines.md)
