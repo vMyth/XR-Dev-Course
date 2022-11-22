@@ -1,6 +1,6 @@
 # Create your Game Dev Portfolio
 
-![Portfolio Plan](https://github.com/vMyth/XR-Dev-Course/blob/main/Images/portfolio_plan.png)
+![Portfolio Plan]([https://github.com/vMyth/XR-Dev-Course/blob/main/Images/portfolio_plan.png](https://github.com/vMyth/XR-Dev-Course/blob/main/Resources/Images/portfolio_plan.png))
 
 ## Resources
 - [Game Design Documente Sample](https://docs.google.com/document/d/1HdM0r31iUkmzJDODsnW-FN_zMareGXT6I4jucLr4Zt8/edit?usp=sharing)
