@@ -1,0 +1,26 @@
+Q1. Which of the following is the correct way of rotating an object on the z axis with amount 'speed'? 
+a) transform.Rotate(0,0,speed*Time.deltaTime);
+b) Rotate(0,0,speed*Time.deltaTime);
+c) transform.Rotate(0,0,speed);
+d) transform.Rotate(0,0,speed*Time);
+
+Q2. What keyword is used to create a coroutine method?
+a) IEnumerator
+b) IEnumerable
+c) Start
+d) Coroutine
+
+Q3. (True/False) The 'New Input System' is Action Based.
+a) True
+b) False
+
+All correct a.
+
+
+
+Please add this question. 
+
+Which of the following times is most suitable? 
+a) 9 AM to 10 AM
+b) 4 PM to 5 PM
+c) 9 PM to 10 PM

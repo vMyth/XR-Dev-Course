@@ -1,0 +1,17 @@
+Q1. Where is the "Skybox Material" Setting available in unity?
+a) Rendering>Lighting>Environment
+b) Environment>Rendering>Lighting
+c) Rendering>Lighting Explorer>Environment
+d) Rendering>Environment>Lighting
+
+Q2. Which of the following is correct?
+a) InvokeRepeating(string methodName, float time, float repeatRate);
+b) InvokeRepeating(int methodName, float time, float repeatRate);
+c) InvokeRepeating(float time, float repeatRate, string methodName);
+d) InvokeRepeating(float repeatRate, string methodName, float time);
+
+Q3. (True/False) GetComponent(Type type) returns the component of Type type if the game object has one attached, null if it doesn't.
+a) True
+b) False
+
+All correct a.

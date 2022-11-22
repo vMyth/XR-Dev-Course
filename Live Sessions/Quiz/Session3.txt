@@ -1,0 +1,19 @@
+Q1. What is the extension of a scene?
+a) .unity
+b) .un
+c) .unt
+d) .unit
+
+Q2. What is the extension of the export package? 
+a) .unitypackage 
+b) .unpck
+c) .unity
+d) .pack 
+
+Q3. Vector3.left corresponds to which of the following?
+a) (-1, 0,  0)
+b) (0,  1,  0)
+c) (1,  0,  0)
+d) (0,  0,  -1)
+
+All correct a.

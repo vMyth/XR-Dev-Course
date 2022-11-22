@@ -1,0 +1,173 @@
+//Continued from Session 16&17
+
+12. Add Ammo UI
+//Add text element in canvas
+
+//In Shoot Scrip add,
+//Ammo Text
+    public TextMeshProUGUI ammoText;
+
+    private void Update()
+    {
+        ammoText.SetText(currentAmmo.ToString()+"/"+carriedAmmo.ToString());
+    }
+
+
+//## SPAWNING ENEMEIES ##\\
+
+//Add Trigger on the Entry Gate --> Cube - SpawnTrigger01
+// Move To View using Ctrl+Alt+F
+//Resize According to doorway
+//Turn off Mesh Renderer
+//IsTrigger Activate
+
+//Add SpawnPoints - 03
+//Make SpawnPoints Trigger
+
+//Create New Script EnemySpawner
+
+public GameObject enemyToSpawn;
+public Transform[] spawnPoints;
+
+OnTriggerEnter()
+{
+	if(other.tag == "Player")
+	{
+		SpawnEnemies;
+	}
+}
+
+void SpawnEnemies()
+{
+	foreach(var sp in spawnPoints)
+	{
+		Instantiate (enemyToSpawn, sp.position, sp.rotation);
+	}
+
+}
+
+//Later add box collider trigger and disable
+
+trigger.enabled = false;
+
+----------------------------------------------------
+
+//BUG FIX
+
+1. making enemy health 0
+In EnemyHealth 
+
+    public Collider[] enemyCol;
+
+	//in EnemyDead() ...
+        enemyHealth = 0f;
+        foreach (var col in enemyCol)
+        {
+            col.enabled = false;
+        }
+
+2. ensuring player is not attacked after enemy is dead
+In enemy AI
+        if (!isDead && !PlayerHealth.singleton.isDead)
+
+//restructure enemyai to attack, chase, disable
+
+------------------------------------------------------
+
+//Headshot
+
+1. resize capsule collider till shoulders
+
+2. add sphere and name head
+
+3. resize and position head sphere
+
+4. add bloodgush fx
+
+5. position and rotate (xrot=-90, yrot=0)
+
+6. add HeadShot script
+
+    public GameObject head;
+    public GameObject blood;
+
+    private void OnDisable()
+    {
+        head.SetActive(false);
+        blood.SetActive(true);
+    }
+
+add head (mesh) and blood fx
+
+add script to head (collider)
+
+7. add DestroyTime script
+
+    public int destroyTimer = 5;
+
+    private void Awake()
+    {
+        Destroy(gameObject, destroyTimer);
+    }
+
+add script to bloodfx
+
+8. In Shoot Script
+
+    [SerializeField]
+    float headShotDamageEnemy = 100f;
+
+    public AudioClip headShotAudioClip;
+
+//in ShootRay()
+
+            else if (hit.transform.tag == "head")
+            {
+                Debug.Log("ENEMY SHOT");
+                EnemyHealth EnemyHealthScript = hit.transform.GetComponentInParent<EnemyHealth>();
+                EnemyHealthScript.DeductHealth(headShotDamageEnemy);
+                if (!hit.transform.GetComponentInParent<EnemyHealth>().isEnemyDead) Instantiate(bloodEffect, hit.point, Quaternion.identity);
+                hit.transform.gameObject.SetActive(false);
+                gunAudioSource.PlayOneShot(headShotAudioClip);
+            }
+
+9. Import Audio
+
+10. Fix blood gush
+
+11. Add enemy head collider
+
+-----------------------------------------------
+
+// Health Bar + Counter UI
+
+1. Using Slider
+
+2. Using Radial Fill in Images (use three images)
+
+In PlayerHealth Screipt
+
+    public Image healthRadial;
+    public TextMeshProUGUI healthText;
+
+    private void Update()
+    {
+        if(currentHealth <= 0)
+        {
+            isDead = true;
+            healthRadial.fillAmount = 0;
+            healthText.text = 0.ToString();
+        }
+        else
+        {
+            healthRadial.fillAmount = currentHealth / 100;
+            healthText.text = currentHealth.ToString();
+        }
+        if (isDead) Destroy(GetComponent<Shoot>());
+    }
+
+--------------------------------------------------
+
+
+
+

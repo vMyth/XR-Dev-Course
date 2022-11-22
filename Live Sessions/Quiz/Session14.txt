@@ -1,0 +1,19 @@
+Q1. What is NavMesh? 
+a) a designated mesh in your Unity scene, which specifies navigable areas in your environment
+b) defines how high the player can jump
+c) helps in player movement
+d) helps in running the game smoother
+
+Q2. What is an Animator Controller?
+a) Unity asset that controls the logic of an animated GameObject
+b) controls the rotations of an object
+c) unity asset that controls the logic of a scipt attached to a GameObject
+d) helps in controlling a coroutine
+
+Q3. Which of the following is not part of Animation Parameters.
+a) String
+b) Int
+c) Bool
+d) Float
+
+All correct a.

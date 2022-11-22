@@ -1,0 +1,19 @@
+Q1. Which of the following can be used to access position of a gameobject in a script?
+a) transform.position
+b) GameObject.pos
+c) transform.pos
+d) GameObject.position
+
+Q2. Which is true for Input.GetKey(string name);?
+a) Returns true while the user holds down the key identified by name.
+b) Returns true during the frame the user releases the key identified by name.
+c) Returns true during the frame the user starts pressing down the key identified by name.
+
+
+Q3. What does AddForce do?
+a) Adds a force to the Rigidbody.
+b) Adds force to the GameObject.
+c) Adds force to a Player.
+d) Nothing
+
+All correct a.

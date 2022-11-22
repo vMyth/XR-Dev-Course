@@ -1,0 +1,168 @@
+// Adding Enemy AI + Animations
+
+1. Bake NavMesh
+2. Add NavMesh Agent
+
+3. Create EnemyAI Script
+
+using UnityEngine.AI;
+
+NavMeshAgent agent;
+Transform target;
+
+Start()
+{
+	agent = GetComponent<NavMeshAgent>();
+	target = GameObject.FindGameObjectWithTag("Player").transform;
+}
+
+
+4. Animation Controller --> ZombieAnimController --> Add idle, walk, attack, dead animations with conditions (bool for walk and attack .. trigger for dead)
+
+5. Modify EnemyAI Script
+
+using UnityEngine.AI;
+
+NavMeshAgent agent;
+Transform target;
+Animator anim;
+
+Start()
+{
+	agent = GetComponent<NavMeshAgent>();
+	target = GameObject.FindGameObjectWithTag("Player").transform;	
+	anim = GetComponent<Animator>();
+}
+
+Update()
+{
+	float distance = Vector3.Distance(transform.position, target.position)
+
+	if(distance > 2)
+	{
+		// add later --> agent.updatePosition = true;
+		agent.SetDestination(target.position);
+		anim.SetBool("isWalking", true);
+		anim.SetBool("isAttacking", false);
+	}
+	else
+	{
+		agent.updatePosition = false;
+		anim.SetBool("isWalking", false);
+		anim.SetBool("isAttacking", true);
+	}
+}
+
+6. Set stopping distance to 1.5
+
+7. Death Animation 
+
+--> in EnemyAI
+public void EnemyDeathAnim()
+{
+	anim.SetTrigger("isDead");
+}
+
+--> in EnemyHealth
+EnemyAI enemyAI;
+
+Start()
+{
+	enemyAI = GetComponent<EnemyAI>();
+}
+
+void EnemyDead()
+{
+	enemyAI.EnemyDeathAnim();
+	Destroy(gameObject, 10); 
+}
+
+8. Add check for isdead in movement
+
+9. Mak enemy look towards the player when attacking the player
+
+	else
+	{
+		// agent.updateRotation = false;
+		Vector3 direction = target.position - transform.position;
+		//add later --> direction.y = 0; 
+		transform.rotation = Quternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), 5f*Time.deltaTime);
+		agent.updatePosition = false;
+		anim.SetBool("isWalking", false);
+		anim.SetBool("isAttacking", true);
+	}
+
+
+// Player Health
+
+1. Create script PlayerHealth
+
+public float currentHealth;
+public float maxHealth = 100f;
+
+Start()
+{
+	currentHealth = maxHealth;
+}
+
+public void DamagePlayer(float damage)
+{
+	currentHealth -= damage;
+}
+
+2. PlayerHealth Singleton
+
+public static PlayeHealth singleton;
+
+Awake()
+{
+	singleton = this;
+}
+
+3. Inside EnemyAI
+
+public bool canAttack = true;
+public float damageAmount = 35f;
+float attackTime = 2f;
+	else if(canAttack)
+	{
+		// agent.updateRotation = false;
+		......
+		anim.SetBool("isAttacking", true);
+
+		StartCoroutine(AttackTime());
+	}
+
+IEnumerator AttackTime()
+{
+	canAttack = false;
+	yield return new WaitForSeconds(0.5);
+	PlayerHealth.singleton.DamagePlayer(damageAmount);
+	yield return new WaitForSeconds(attackTime);
+	canAttack = true;
+}
+
+4. Inside PlayerHealth
+
+public bool isDead;
+
+public void DamagePlayer(float damage)
+{
+	if(currentHealth>0)
+	{
+		currentHealth -= damage;
+	}
+	else
+	{
+		Dead();
+	}
+}
+
+void Dead()
+{
+	currentHealth = 0;
+	isDead = true;
+	Debug.Log("PLAYER DEAD");
+}
+
+   

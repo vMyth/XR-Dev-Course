@@ -1,0 +1,67 @@
+// Moves an object to the set position
+transform.position = new Vector3(10, 0, 5);
+
+// Moves an object up 2 units
+transform.position += new Vector3(0, 2, 0);
+
+
+void Update()
+{
+    // Moves the object forward two units every frame.
+    transform.Translate(0,0,2);
+}
+
+
+void Update() 
+{
+    // Moves the object forward at two units per second.
+    transform.position += new Vector3(0,0,2) * Time.deltaTime; 
+}
+
+
+public float speed = 2;
+void Update()
+{
+    // Moves the object forward at two units per second.
+    transform.Translate(Vector3.forward * speed * Time.deltaTime);
+}
+
+
+Vector3.forward   // (0,  0,  1)
+Vector3.back      // (0,  0,  -1)
+Vector3.up        // (0,  1,  0)
+Vector3.down      // (0,  -1, 0)
+Vector3.right     // (1,  0,  0)
+Vector3.left      // (-1, 0,  0)
+
+transform.forward  // object forward
+-transform.forward // object back
+transform.up       // object up
+-transform.up      // object down
+transform.right    // object right
+-transform.right   // object left
+
+public float speed = 2;
+void Update()
+{
+    // Moves an object forward, relative to its own rotation.
+    transform.position += transform.forward * speed * Time.deltaTime;
+}
+
+
+public float speed = 2;
+void Update()
+{
+    float x = Input.GetAxis("Horizontal");
+    float z = Input.GetAxis("Vertical");
+    Vector3 movement = new Vector3(x, 0, z);
+    transform.Translate(movement * speed * Time.deltaTime);
+}
+
+
+public Rigidbody rb;
+public float forceAmount = 10;
+void FixedUpdate()
+{
+    rb.AddForce(Vector3.up * forceAmount);
+}

@@ -1,0 +1,90 @@
+//// Player Controller
+
+private Rigidbody rb;
+
+public speed;
+
+void Start()
+{
+	rb = Getcomponent<Rigidbody>();
+}
+
+void FixedUpdate()
+{
+	float moveHor = Input.GetAxis("Horizontal");
+    	float moveVer = Input.GetAxis("Vertical");
+    	
+	Vector3 movement = new Vector3(moveHor, 0, moveVer);
+
+	rb.Addforce(movement * speed);
+}
+
+
+//// Camera Controller
+
+public GameObject player;
+
+private Vector3 offset;
+
+void Start()
+{
+	offset = trnasform.position - player.transform.position;
+}
+
+void LateUpdate()
+{
+	transform.position = player.transform.position + offset;
+}
+
+
+//// Rotator
+
+void Update()
+{
+	transform.Rotate(new Vector3(15,30,45)*time.deltaTime);
+}
+
+
+//// Collision - Player Controller
+
+void OnTriggerEnter(Collider other)
+{
+	if(other.gameObject.CompareTag("PickUp"))
+	{
+		other.gameObject.SetActive(false);
+	}
+}
+
+
+//// Count - Player Controller
+private int count;
+
+--start--
+count = 0;
+
+void OnTriggerEnter(Collider other)
+{
+	if(other.gameObject.CompareTag("PickUp"))
+	{
+		other.gameObject.SetActive(false);
+		count = count + 1;
+	}
+}
+
+//// UI - PC
+using UnityEngine.UI;
+using TMPro;
+
+public TextMeshProUGUI ct;
+
+--start--
+ct.text = "Count" + count.ToString();
+
+
+//// Reload - Button
+using UnityEngine.SceneManagement;
+
+public void Reload()
+{
+    SceneManager.LoadScene(0);
+}

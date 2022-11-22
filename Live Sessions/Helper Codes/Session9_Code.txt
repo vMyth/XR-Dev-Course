@@ -1,0 +1,5 @@
+IEnumerator PlayPop()
+    {
+        AudioPlay.Play();
+        yield return new WaitForSeconds(AudioPlay.clip.length);
+    }

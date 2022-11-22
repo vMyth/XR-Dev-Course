@@ -1,0 +1,202 @@
+//Pickup System
+
+// Two Ways --> 
+1. Proximity Trigger
+2. Distance Check -> Press Button to Pickup
+
+// Common Setup
+
+1. Create HealthPickup
+public class HealthPickUp : MonoBehaviour
+{
+    public float healthAmount = 20f;
+}
+
+2. Create AmmoPickup
+
+
+3. In PlayerHealth 
+
+    public void PickUpHealth(float healthAmount)
+    {
+        currentHealth += healthAmount;
+    }
+
+4. In Shoot add PickUpAmmo Function
+
+//1. Trigger Pickup
+
+//Create new script PickUpTrigger
+    GameObject player;
+    public bool isHealthPickUp = false;
+    public bool isAmmoPickUp = false;
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            if (isHealthPickUp)
+            {
+                player.GetComponent<PlayerHealth>().PickUpHealth(GetComponent<HealthPickUp>().healthAmount);
+                Done();
+            }
+        }
+    }
+    private void Done()
+    {
+        Destroy(gameObject);
+    }
+
+//Add functionaliy for Ammo
+
+//2. Distance and Click Pickup
+
+//Create new Script PickUpDistance
+    GameObject player;
+    public bool isHealthPickUp = false;
+    public bool isAmmoPickUp = false;
+
+    public static bool activePickUp = false;
+
+    public GameObject helperText;
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+    private void Update()
+    {
+        float distance = Vector3.Distance(transform.position, player.transform.position);
+        print(distance);
+        if (distance <= 2f)
+        {
+            activePickUp = true;
+            helperText.gameObject.SetActive(true);
+            PickUp();
+        }
+        else
+        {
+            activePickUp = false;
+            helperText.gameObject.SetActive(false);
+        }
+    }
+    public void PickUp()
+    {
+        if (Shoot.canPickup)
+        {
+            if (isHealthPickUp)
+            {
+                player.GetComponent<PlayerHealth>().PickUpHealth(GetComponent<HealthPickUp>().healthAmount);
+                Done();
+            }
+        }
+    }
+    private void Done()
+    {
+        helperText.gameObject.SetActive(false);
+        Destroy(gameObject);
+    }
+
+//Add functionality for Ammo
+
+//Add new Input Action --> Pick
+
+//In Shoot Script
+
+    public static bool canPickup = false;
+
+    void OnPick()
+    {
+        if (PickUpDistance.activePickUp)
+        {
+            canPickup = true;
+        }
+        else
+        {
+            canPickup = false;
+        }
+    }
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+//Player Respawn 
+
+//Multiple Ways --> Level Respawn OR Health Respawn
+
+------------------------------------------------------------------------------------------------------------------------
+
+//Save Data
+
+// Create Login Screen
+
+//LogIn Script
+public TMP_InputField username;
+    string dataFilePath;
+
+    public void LogOn()
+    {
+        string uName = username.text;
+        print(uName);
+        if (uName == "")
+        {
+            TextMeshProUGUI placeholder = (TextMeshProUGUI)username.placeholder;
+            placeholder.text = "Please fill ID";
+        }
+        else
+        {
+            dataFilePath = Application.dataPath + "/" + uName + ".csv";
+            PlayerPrefs.SetString("FilePath", dataFilePath);
+            PlayerPrefs.SetString("username", uName);
+            CreateFile(dataFilePath);
+        }
+    }
+
+    private void CreateFile(string path)
+    {
+        if (!File.Exists(path))
+        {
+            File.WriteAllText(path, "username, health, ammo");
+            SceneManager.LoadScene(1);
+        }
+        else
+        {
+            //TextMeshProUGUI placeholder = (TextMeshProUGUI)username.placeholder;
+            //placeholder.text = "ID Already Exists";
+            //username.text = null;
+            SceneManager.LoadScene(1);
+        }
+    }
+
+// Create GameOver Screen
+    string file, uname, ammo, health;
+    void Start()
+    {
+        file = PlayerPrefs.GetString("FilePath"); 
+        uname = PlayerPrefs.GetString("username");
+        ammo = PlayerPrefs.GetInt("ammo").ToString();
+        health = PlayerPrefs.GetInt("health").ToString();
+
+        string data = uname + " " + ammo + " " + health;
+
+        File.AppendAllText(file, System.Environment.NewLine + data);
+    }
+// In Shoot
+    public static void GameOver()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+	// in update 
+        PlayerPrefs.SetInt("ammo", carriedAmmo+currentAmmo);
+        PlayerPrefs.SetFloat("health", PlayerHealth.singleton.currentHealth);
+
+        print(GameObject.FindGameObjectsWithTag("Enemy").Length);
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+

@@ -1,0 +1,68 @@
+// Rotate Fan
+float soeed = 200f;
+
+void Update()
+{
+	transform.Rotate(0,0,speed*Time.deltaTime);
+}
+
+
+// light flicker -- coroutine
+
+Light lig;
+
+public float min, max;
+
+private void Start()
+{
+    lig = GetComponent<Light>();
+    StartCoroutine(MakeLightFlicker());
+}
+
+IEnumerator MakeLightFlicker()
+{
+    while (true)
+    {
+        yield return new WaitForSeconds(Random.Range(min, max));
+        lig.enabled = !lig.enabled;
+    }
+}
+
+
+// Shooting Script -- Pistol
+RaycastHit hit;
+
+public int currentAmmo;
+
+public Transform shootPoint;
+
+//RateOfFire
+public float rof;
+public float nextfire = 0;
+
+public float weaponRange;
+
+void OnShoot()
+{
+    {
+        if (Time.time > nextfire)
+        {
+            nextfire = Time.time + rof;
+
+            currentAmmo--;
+
+            if (Physics.Raycast(shootPoint.position, shootPoint.forward, out hit, weaponRange))
+            {
+                if (hit.transform.tag == "Enemy")
+                {
+                    Debug.Log("Hit Enenmy");
+                }
+                else
+                {
+                    Debug.Log("Hit Something Else");
+                }
+                Debug.DrawRay(shootPoint.position, shootPoint.forward, Color.red, 0.1f);
+            }
+        }
+    }
+}

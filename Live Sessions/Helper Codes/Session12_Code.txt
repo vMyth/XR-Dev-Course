@@ -1,0 +1,122 @@
+// Shooting Script -- Pistol
+RaycastHit hit;
+
+public int currentAmmo;
+
+public Transform shootPoint;
+
+//RateOfFire
+public float rof;
+public float nextfire = 0;
+
+public float weaponRange;
+
+void OnShoot()
+{
+    {
+        if (Time.time > nextfire)
+        {
+            nextfire = Time.time + rof;
+
+            currentAmmo--;
+
+            if (Physics.Raycast(shootPoint.position, shootPoint.forward, out hit, weaponRange))
+            {
+                if (hit.transform.tag == "Enemy")
+                {
+                    Debug.Log("Hit Enenmy");
+                }
+                else
+                {
+                    Debug.Log("Hit Something Else");
+                }
+                Debug.DrawRay(shootPoint.position, shootPoint.forward, Color.red, 0.1f);
+            }
+        }
+    }
+}
+
+
+// ENEMYDAMAGE
+//EnemyHealth 
+
+public float enemyHealth = 100f;
+
+public void DeductHealth(float deductHealth)
+{
+	enemyHealth -= deductHealth;
+	
+	if(enemyHealth <=0) 
+	{
+		EnemyDead();
+	}
+}
+
+EnemyDead()
+{
+	Destroy(gameObject);
+}
+
+
+// Add to pistol script
+
+//Used to damage enemy
+float damEnem = 10;
+
+//Debug.Log("Hit Enenmy"); ---> 
+EnemyHealth ehs = hit.transform.GetComponent<EnemyHealth>();
+ehs.DeductHealth(damEnem);
+
+
+// MUZZLE FLASH and CARTRIDGE
+//Add to pistol script
+
+//WeaponEffects
+public ParticleSystem muzzleFlash;
+
+public ParticleSystem bulletCasing;
+
+Start()
+{
+	muzzleFlash.Stop();
+	bulletCasing.Stop();
+}
+
+IEnumerator WeaponEffects()
+{
+	bulletCasing.Start();
+	muzzleFlash.Play();
+	yield return new WaitForEndOfFrame();
+	muzzleFlash.Stop();
+	bulletCasing.Stop();
+}
+
+void OnShoot()
+{
+    {
+        if (Time.time > nextfire)
+        {
+		StartCoroutine(WeaponEffects());
+.
+.
+.
+
+// Audio
+AudioSource gunAS;
+AudioClip shootAC;
+
+Start()
+{
+	gunAS = GetComponent<AudioSource>();
+}
+
+void OnShoot()
+{
+    {
+        if (Time.time > nextfire)
+        {
+		gunAS.PlayOneShot(gunAC);
+		StartCoroutine(WeaponEffects());
+.
+.
+.

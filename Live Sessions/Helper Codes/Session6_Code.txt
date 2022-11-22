@@ -1,0 +1,39 @@
+// Set UserName (PlayerPrefs Example)
+string name;
+public GameObject nameIF;
+public void startb()
+{
+    name = nameIF.GetComponent<TMP_InputField>().text;
+    PlayerPrefs.SetString("name", name);
+    SceneManager.LoadScene("Roll-A-Ball");
+}
+
+// Instantiate Collectibles
+public GameObject ctb;
+public GameObject ctp;
+
+private void Start()
+{
+    for(int i = 0; i < 10; i++)
+    {
+        Instantiate(ctb, new Vector3(Random.Range(-7, 7), 0.5f, Random.Range(-7, 7)), Quaternion.identity, ctp.transform);
+    }
+}
+
+// Ground Spawner
+public GameObject ground;
+private void GroundSpawn()
+{
+    Instantiate(ground);
+}
+
+private void OnTriggerEnter(Collider other)
+{
+    GroundSpawn();
+}
+
+// Set New Position
+private void Awake()
+{
+    transform.position = transform.position + new Vector3(0, 0, 20);
+}

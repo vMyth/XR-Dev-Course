@@ -1,0 +1,72 @@
+// MUZZLE FLASH and CARTRIDGE
+//Add to pistol script
+
+//WeaponEffects
+public ParticleSystem muzzleFlash;
+
+public ParticleSystem bulletCasing;
+
+Start()
+{
+	muzzleFlash.Stop();
+	bulletCasing.Stop();
+}
+
+IEnumerator WeaponEffects()
+{
+	bulletCasing.Start();
+	muzzleFlash.Play();
+	yield return new WaitForEndOfFrame();
+	muzzleFlash.Stop();
+	bulletCasing.Stop();
+}
+
+void OnShoot()
+{
+    {
+        if (Time.time > nextfire)
+        {
+		StartCoroutine(WeaponEffects());
+.
+.
+.
+
+// Audio
+AudioSource gunAS;
+AudioClip shootAC;
+
+Start()
+{
+	gunAS = GetComponent<AudioSource>();
+}
+
+void OnShoot()
+{
+    {
+        if (Time.time > nextfire)
+        {
+		gunAS.PlayOneShot(gunAC);
+		StartCoroutine(WeaponEffects());
+.
+.
+.
+
+
+
+// NAVMESH
+
+//PlayerNavMesh
+using UnityEngine.AI;
+
+public Transform mover;
+private NavMeshAgent nav;
+
+Awake()
+{
+	nav = GetComponent<NavMeshAgent>();
+}
+
+Update()
+{
+	nav.destination = mover.position;
+}

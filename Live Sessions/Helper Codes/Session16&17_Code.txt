@@ -1,0 +1,146 @@
+// Adding Bullet Effects
+
+1. Back to particle pack
+
+2. Flesh and Metal Bullet Impact Fx
+
+3. In Pistol script
+
+//Bullet Impact Effect
+public GameObject bloodEffect;
+public GameObject wallEffect;
+
+//In ENEMY SHOT
+Instantiate(bloodEffect, hit.point, Quaternion.identity);
+
+//IN SOMETHING ELSE SHOT
+Instantiate(wallEffect, hit.point, Quaternion.FromToRotation(Vector3.forward, hit.normal));
+
+4. Fix Dead Fall Animation 
+
+(in EnemyAI Scriptt)
+
+In public void EnemyDeathAnimation(), add if(!isDead)
+
+OR
+
+(in EnemyHealth Script)
+
+public bool isenemyDead; 
+
+public void DeductHealth(float deductHealth)
+{
+	if (!isenemyDead)
+      {
+		...
+	}
+}
+
+void EnemyDead()
+{
+	isenemyDead = true;
+	...
+}
+
+5. Stop BulletImpact Flesh 
+
+In Shoot
+
+//Make isenemyDead static in EnemyHealth
+if(!EnemyHealth.isenemyDead) Instantiate(bloodEffect, hit.point, Quaternion.identity);
+
+OR
+//Make isenemyDead not-static in EnemyHealth
+if(!hit.transform.GetComponent<EnemyHealth>().isenemyDead) Instantiate(bloodEffect, hit.point, Quaternion.identity);
+
+
+// KeyFrame Animation for Pistol
+1. Create New Folder Animations
+2. Open Animation Window
+3. Create new anim --> Recoil
+4. For Recoil (Press Record)
+Add Position (back)
+Add Rotation (up)
+
+5. Create new Anim --> Reload
+Gun Position (up)
+Gun Rotation (z-axis)
+Remove Magazine (change pos y-axis)
+Put Back Magazine (copy y value from start)
+
+6. Shoot Animation
+Trigger (change pivot --> Rotate back)
+Hammer (rotate and bring back)
+Slider (move back)
+Fix slider animation from initial keypoints
+
+7. Idle Animation
+4 sec
+at 2 sec (increase height slightly)
+
+8. In Animator
+Setup the animations with Shoot and Reload triggers
+Set Exit time to 0 and uncheck fixed duration wherever necessary
+
+9. In Shoot Script
+    //Animate Pistol
+    public Animator anim;
+    anim.SetTrigger("Shoot");
+
+10. Talk about Events in Animations //Create TESTEVENT SCRIPT
+    Animator anim;
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+        anim.SetTrigger("Shoot");
+    }
+
+    public void testevent()
+    {
+        Debug.Log("TEST TEST TEST");
+    }
+
+//ADD EVENT IN Recoil Animation
+
+
+11. Adding Reloading
+
+//IN SHOOT SCRIPT
+
+    public int currentAmmo = 12;
+    public int maxAmmo = 12;
+    public int carriedAmmo = 60;
+    bool isReloading;
+
+    void Reload()
+    {
+        if(carriedAmmo<=0) return;
+        StartCoroutine(ReloadCountDown(2f));
+    }
+
+    IEnumerator ReloadCountDown(float timer)
+    {
+        while (timer > 0f) 
+        {
+            isReloading = true;
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        if(timer <= 0f)
+        {
+            isReloading = false;
+            int bulletsNeededToFillMag = maxAmmo - currentAmmo;
+            int bulletsToDeduct = (carriedAmmo >= bulletsNeededToFillMag) ? bulletsNeededToFillMag : carriedAmmo;
+
+            carriedAmmo -= bulletsToDeduct;
+            currentAmmo += bulletsToDeduct;
+        }
+    }
+
+//ADD INPUT ASSET RELOAD R KEY--> (listen instead of search)
+
+// Create OnReload() Function
+
+// Separate Fire and DryFire based on currentammo 
+
+//Change DRYFIRE audioclip

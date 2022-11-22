@@ -1,0 +1,19 @@
+Q1. What namespace needs to be added to use TextMeshPro in C#?
+a) TMPro
+b) TMP
+c) TextMeshPro
+d) TextMesh
+
+Q2. Which of the following function loads a new scene?
+a) LoadScene()
+b) Load()
+c) NewScene()
+d) Scene()
+
+Q3. Which of the following mehthods can be used to detect a trigger event during collision of two objects?
+a) OnTriggerEnter()
+b) Trigger()
+c) Collide()
+d) Collision()
+
+All correct a.

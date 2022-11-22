@@ -1,0 +1,17 @@
+Q1. What does CancelInvoke(); do?
+a) Cancels all Invoke calls on this MonoBehaviour.
+b) Cancels a single Invoke call
+c) Can change the repeating time for the invoke calls
+d) Pause the game
+
+Q2. Which of the following is correct to access color of an object?
+a) GameObject.GetComponent<Renderer>().material.color
+b) GameObject.GetComponent<Renderer>.material.color
+c) GameObject.GetComponent<>().material.color
+d) GameObject.material.GetComponent<Renderer>().color
+
+Q3. (True/False) Each scene can have multiple Audio Listener.
+a) False
+b) True
+
+All correct a.

@@ -1,0 +1,17 @@
+Q1. Which one of the following is correct?
+a) public static Object Instantiate(Object original, Vector3 position, Quaternion rotation, Transform parent);
+b) public static Object Instantiate(Vector3 position, Object original, Quaternion rotation, Transform parent);
+c) public static Object Instantiate(Object original, Transform parent, Vector3 position, Quaternion rotation);
+d) public static Object Instantiate(Object original, Quaternion rotation, Vector3 position, Transform parent);
+
+Q2. (True/False) We can use PlayerPrefs to store sensitive data?
+a) False
+b) True
+
+Q3. What does activating 'IsTrigger' on colliders do?
+a) A trigger doesn't register a collision with an incoming Rigidbody. 
+b) It collides with other colliders present in the scene but also calls functions like OnTriggerEnter.
+c) It makes the object stationary. 
+d) It does not allow for forces to be applied on the object.
+
+All correct a.

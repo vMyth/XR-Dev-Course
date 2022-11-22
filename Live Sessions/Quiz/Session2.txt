@@ -1,0 +1,17 @@
+Q1. Which Unity window contains a list of all the game objects currently in your scene?
+a) Hierarchy
+b) Project window
+c) Scene view
+d) Inspector
+
+Q2. Which of the following is correct?
+a) Q- Hand W- Move E- Rotate R- Scale 
+b) Q- Scale W- Rotate E- Move R- Hand
+c) Q- Hand W- Rotate E- Scale R- Move 
+d) Q- Move W- Scale E- Hand R- Rotate 
+
+Q3. (True/False) Transform of a game object can change only the position of the object.
+a) False
+b) True
+
+All correct a.

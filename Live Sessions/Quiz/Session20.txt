@@ -1,0 +1,19 @@
+Q1. Which of the following is NOT true for 'static'?
+a) makes it easy to create constant variables
+b) static keyword can be added to methods, classes and variables
+c) allows the data to be stored in memory for the length of the program’ s runtime
+d) can access data at a class level instead of an instance of class
+
+Q2. What does turning on 'isTrigger' on a collider do?
+a) doesn't register a collision with an incoming Rigidbody
+b) registers a collision with an incoming Rigidbody
+c) makes the collider unusable
+d) changes the shape of the collider volume
+
+Q3. What does public static GameObject FindWithTag(string tag); return?
+a) one active GameObject tagged tag
+b) an array of active GameObjects tagged tag
+c) empty array
+d) null
+
+All correct a.

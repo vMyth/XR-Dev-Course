@@ -1,0 +1,18 @@
+// Endless Ground
+// Ground Spawner
+public GameObject ground;
+private void GroundSpawn()
+{
+    Instantiate(ground);
+}
+
+private void OnTriggerEnter(Collider other)
+{
+    GroundSpawn();
+}
+
+// Set New Position
+private void Awake()
+{
+    transform.position = transform.position + new Vector3(0, 0, 20);
+}

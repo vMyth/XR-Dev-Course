@@ -1,0 +1,20 @@
+Q1. Which of the following is NOT an overload available for Instaniate?
+a) public static Object Instantiate(Object original, Vector3 position, Transform parent);
+b) public static Object Instantiate(Object original);
+c) public static Object Instantiate(Object original, Transform parent, bool instantiateInWorldSpace);
+d) public static Object Instantiate(Object original, Vector3 position, Quaternion rotation);
+
+Q2. What does Quaternion.FromToRotation do?
+a) Creates a rotation which rotates from fromDirection to toDirection
+b) controls the position of an object
+c) unity asset that controls the logic of a scipt attached to a GameObject
+d) helps in controlling a coroutine
+
+Q3. What does the following method returns?
+public static Vector3 Lerp(Vector3 a, Vector3 b, float t);
+a) Vector3 Interpolated value, equals to a + (b - a) * t.
+b) Vector2 Distance value, equals to a + (b - a).
+c) Vector3 Zero values.
+d) Will give compiler error.
+
+All correct a.
