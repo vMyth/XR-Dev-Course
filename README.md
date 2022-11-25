@@ -2,7 +2,7 @@
 ###### This repository contains all resources and content (with relevant links) used in the delivery of the course. 
 
 ## Live Session
-- [Session Recordings](https://youtube.com/playlist?list=PL1oEtUfPeRwauKk3_5pNhoLFw1SWvQIZf)
+- [Session Recordings](https://www.youtube.com/watch?v=YJMQirzcqes&list=PL1oEtUfPeRwauKk3_5pNhoLFw1SWvQIZf)
 - [Slides](https://github.com/vMyth/XR-Dev-Course/tree/main/Live%20Sessions/Slides)
 - [Quizzes](https://github.com/vMyth/XR-Dev-Course/tree/main/Live%20Sessions/Quiz)
 - [Helper Codes](https://github.com/vMyth/XR-Dev-Course/tree/main/Live%20Sessions/Helper%20Codes)
